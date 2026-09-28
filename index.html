@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Georgina Jeruti · 4° Cumpleaños · VIP Pass</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Inter & SF-Pro compatible typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti & Tone.js para feedback háptico-sonoro estilo Apple -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+
+  <style>
+    :root {
+      --apple-pink: #ff2d55;
+      --apple-soft-pink: #ff6482;
+      --apple-bg: #09080e;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0d0a14;
+      color: #f5f5f7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-display {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Apple Frosted Glass (visionOS style) */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.55), 
+                  0 18px 36px -18px rgba(255, 45, 85, 0.25),
+                  inset 0 1px 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .glass-card-subtle {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    /* Ambient animated lighting */
+    .orb-glow {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
+      animation: pulseGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(1) translate(0, 0); opacity: 0.55; }
+      50% { transform: scale(1.15) translate(15px, -20px); opacity: 0.8; }
+      100% { transform: scale(0.95) translate(-15px, 15px); opacity: 0.6; }
+    }
+
+    /* Smooth shimmer */
+    .shimmer-text {
+      background: linear-gradient(135deg, #ffffff 20%, #ff8fab 50%, #ffffff 80%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 5s linear infinite;
+    }
+
+    @keyframes shimmerText {
+      to { background-position: 200% center; }
+    }
+
+    /* Micro-interactions */
+    .apple-touch {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-touch:hover {
+      transform: translateY(-2px) scale(1.01);
+    }
+    .apple-touch:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col justify-center items-center py-6 px-3 sm:px-6 relative select-none">
+
+  <!-- Ambient background glow orbs -->
+  <div class="orb-glow w-80 h-80 sm:w-[480px] sm:h-[480px] bg-rose-600/40 -top-20 -left-20"></div>
+  <div class="orb-glow w-96 h-96 sm:w-[520px] sm:h-[520px] bg-pink-500/30 top-1/3 -right-24"></div>
+  <div class="orb-glow w-80 h-80 sm:w-[400px] sm:h-[400px] bg-sky-500/25 -bottom-20 left-10"></div>
+
+  <!-- Contenedor maestro tipo Apple Keynote Invitation Card -->
+  <main class="w-full max-w-[420px] glass-panel rounded-[36px] p-5 sm:p-7 relative z-10 overflow-hidden text-center">
+
+    <!-- -->
+    <!-- Apple Status Pill & 4° Cumpleaños Badge Bien Encuadrado y Arriba -->
+    <div class="flex flex-col items-center justify-center gap-2 mb-3">
+      <div class="glass-pill px-3.5 py-1 rounded-full flex items-center gap-2 text-[10px] font-bold tracking-widest text-rose-300 uppercase shadow-sm border border-rose-400/30">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>PAW PATROL · SKYE & FRIENDS · VIP PASS</span>
+      </div>
+
+      <!-- Insignia 4 AÑOS Reubicada Arriba y Perfectamente Encuadrada (Fuera del recuadro de la foto) -->
+      <div class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-black px-5 py-2 rounded-full text-xs sm:text-sm tracking-wider shadow-lg shadow-pink-500/30 border border-white/40 transform hover:scale-105 transition-all">
+        <span>🐾</span>
+        <span class="drop-shadow-sm font-extrabold uppercase">¡CELEBRAMOS MI 4° CUMPLE!</span>
+        <span>✨</span>
+      </div>
+    </div>
+
+    <!-- Skye Hero Display 1:1 Cuadrado Limpio conectado al servidor de contenidos de Google Drive -->
+    <div class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto my-3 group aspect-square">
+      <!-- Glow trasero animado -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/50 via-rose-400/40 to-amber-300/40 rounded-[32px] blur-2xl group-hover:scale-105 transition-all duration-700"></div>
+
+      <!-- Marco principal 1:1 -->
+      <div class="relative w-full h-full rounded-[30px] overflow-hidden glass-card-subtle p-1.5 flex items-center justify-center border-2 border-white/30 shadow-2xl bg-black/30">
+        <img 
+          id="mainHeroImg" 
+          src="https://lh3.googleusercontent.com/d/1FePZzOctn7NSnEyPZwKPxKtKppKJjn8G" 
+          alt="Skye y sus amigos - Georgina Jeruti 4 Años" 
+          class="w-full h-full object-cover rounded-[24px] filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.4)] transform group-hover:scale-[1.02] transition-transform duration-500"
+          onerror="handleDriveFallback(this)"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <!-- Título Principal y Tipografía Editorial -->
+    <div class="mt-4 mb-5">
+      <span class="text-[12px] font-bold uppercase tracking-[0.22em] text-pink-400/90 font-display">
+        Invitación Especial
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight shimmer-text font-display mt-1 leading-tight">
+        Georgina Jeruti
+      </h1>
+      <p class="text-xs sm:text-sm text-gray-300/80 font-normal mt-1.5 flex items-center justify-center gap-1.5">
+        <span>✨</span> ¡A volar se ha dicho, te espero en mi fiesta! <span>🚁</span>
+      </p>
+    </div>
+
+    <!-- Countdown Box estilo Widget iOS -->
+    <div class="glass-card-subtle rounded-2xl p-3.5 mb-5 border border-white/10">
+      <div class="flex items-center justify-between px-1 mb-2">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Cuenta Regresiva</span>
+        <span class="text-[11px] font-semibold text-rose-400 flex items-center gap-1">
+          <span>🐾</span> En vivo
+        </span>
+      </div>
+      <div class="grid grid-cols-4 gap-2 text-center" id="countdownTimer">
+        <div class="bg-black/30 rounded-xl p-2 border border-white/5">
+          <span id="cdDays" class="block font-display font-black text-xl sm:text-2xl text-white">00</span>
+          <span class="text-[9px] font-medium tracking-wider text-gray-400 uppercase">Días</span>
+        </div>
+        <div class="bg-black/30 rounded-xl p-2 border border-white/5">
+          <span id="cdHours" class="block font-display font-black text-xl sm:text-2xl text-white">00</span>
+          <span class="text-[9px] font-medium tracking-wider text-gray-400 uppercase">Horas</span>
+        </div>
+        <div class="bg-black/30 rounded-xl p-2 border border-white/5">
+          <span id="cdMin" class="block font-display font-black text-xl sm:text-2xl text-white">00</span>
+          <span class="text-[9px] font-medium tracking-wider text-gray-400 uppercase">Min</span>
+        </div>
+        <div class="bg-black/30 rounded-xl p-2 border border-white/5">
+          <span id="cdSec" class="block font-display font-black text-xl sm:text-2xl text-pink-400">00</span>
+          <span class="text-[9px] font-medium tracking-wider text-gray-400 uppercase">Seg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta de Detalles del Evento -->
+    <div class="space-y-2.5 text-left mb-5">
+      
+      <!-- Fecha & Hora -->
+      <div class="glass-card-subtle rounded-2xl p-3.5 flex items-start gap-3.5 border border-white/10">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center text-white shrink-0 shadow-md">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-rose-300">Cuándo</span>
+          <p class="text-sm font-bold text-white leading-snug">Miércoles, 07 de octubre de 2026</p>
+          <p class="text-xs text-pink-300/90 font-medium">19:00 hs (Puntual)</p>
+        </div>
+      </div>
+
+      <!-- Lugar exacto con referencia -->
+      <div class="glass-card-subtle rounded-2xl p-3.5 flex items-start gap-3.5 border border-white/10">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-white shrink-0 shadow-md">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div class="min-w-0 flex-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">Dónde</span>
+          <p class="text-sm font-bold text-white leading-snug truncate">Salón de Eventos Pizza Hut</p>
+          <p class="text-xs text-gray-300 leading-snug">Calle Adrián Jara, Ciudad del Este</p>
+          <p class="text-[11px] text-gray-400 mt-0.5">Alto Paraná, Paraguay</p>
+        </div>
+      </div>
+
+      <!-- Alerta Confirmación Límite -->
+      <div class="bg-rose-950/40 border border-rose-500/30 rounded-2xl p-3 flex items-center gap-3">
+        <div class="text-xl">⚠️</div>
+        <div class="text-xs text-rose-200">
+          Confirmar asistencia al número <strong class="text-white">0973 544 415</strong> antes del <span class="text-pink-300 font-bold underline">5 de octubre</span>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Sheet / Botones Interactivos Principales -->
+    <div class="space-y-2.5">
+      
+      <!-- Botón WhatsApp Ultra Polish -->
+      <button id="btnWhatsappRSVP" type="button" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 active:scale-95 text-white font-bold py-3.5 px-5 rounded-2xl flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-500/25 apple-touch text-sm sm:text-base">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+        <span>Confirmar Asistencia (WhatsApp)</span>
+      </button>
+
+      <!-- Fila doble: Cómo Llegar (Google Maps) + Agregar a Calendario -->
+      <div class="grid grid-cols-2 gap-2.5">
+        <a id="btnMapsLink" href="https://maps.google.com/?cid=11759458902688494719" target="_blank" rel="noopener noreferrer" class="glass-pill py-3 px-3 rounded-2xl flex items-center justify-center gap-1.5 text-xs font-semibold text-white/90 hover:bg-white/20 apple-touch">
+          <span>📍</span>
+          <span>Google Maps</span>
+        </a>
+
+        <button id="btnAddToCalendar" type="button" class="glass-pill py-3 px-3 rounded-2xl flex items-center justify-center gap-1.5 text-xs font-semibold text-white/90 hover:bg-white/20 apple-touch">
+          <span>🗓️</span>
+          <span>Agendar</span>
+        </button>
+      </div>
+
+      <!-- Botón Celebrar Chime Apple Style -->
+      <button id="btnSoundCelebrate" type="button" class="w-full bg-white/10 hover:bg-white/15 text-pink-300 hover:text-white border border-pink-400/30 rounded-2xl py-2.5 px-4 text-xs font-bold flex items-center justify-center gap-2 apple-touch">
+        <span>✨</span>
+        <span>Tocar para sonar fanfarria & confeti</span>
+        <span>🎉</span>
+      </button>
+    </div>
+
+    <!-- Pie elegante -->
+    <div class="mt-6 pt-4 border-t border-white/10 text-center">
+      <p class="text-[11px] font-medium tracking-wide text-gray-400/90">
+        "¡Este cachorro va a volar alto!" · Skye Paw Patrol 🐾
+      </p>
+    </div>
+  </main>
+
+  <!-- Modal selector de calendario (Apple Calendar / Google Calendar) -->
+  <div id="calendarModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-xs rounded-[30px] p-5 text-center">
+      <div class="text-3xl mb-1.5">🗓️</div>
+      <h3 class="text-base font-bold text-white">Añadir al Calendario</h3>
+      <p class="text-xs text-gray-300 mt-1 mb-4">Seleccioná tu servicio de preferencia:</p>
+      
+      <div class="space-y-2">
+        <a id="linkGoogleCalendar" href="#" target="_blank" rel="noopener noreferrer" class="block w-full bg-white/10 hover:bg-white/20 border border-white/15 py-2.5 px-3 rounded-xl text-xs font-bold text-white apple-touch">
+          Google Calendar
+        </a>
+        <button id="btnDownloadIcs" type="button" class="w-full bg-white/10 hover:bg-white/20 border border-white/15 py-2.5 px-3 rounded-xl text-xs font-bold text-white apple-touch">
+          Apple Calendar (iPhone / Mac .ics)
+        </button>
+        <button id="btnCloseCalModal" type="button" class="w-full text-xs text-gray-400 py-1.5 font-semibold">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuración centralizada de datos del evento
+    const EVENT_CONFIG = {
+      name: "Georgina Jeruti",
+      age: 4,
+      dateFormatted: "Miércoles, 07 de octubre de 2026",
+      timeFormatted: "19:00 hs",
+      venue: "Salón de Eventos Pizza Hut",
+      address: "Calle Adrián Jara, Ciudad del Este, Paraguay",
+      phone: "595973544415",
+      deadline: "5 de octubre de 2026",
+      eventTimestampIso: "2026-10-07T19:00:00-03:00",
+      userIbbUrl: "https://ibb.co/3yQRdWgt",
+      backupPhoto: "https://images.saymedia-content.com/.image/t_share/MTc0OTc4Mzg2ODk0ODE2NTgx/skye-paw-patrol-character-profile.png"
+    };
+
+    // 1. Audio sintetizado estilo Apple Sound Design (Tone.js)
+    let audioReady = false;
+    let synthChime = null;
+
+    function initAppleChime() {
+      if (!audioReady && typeof Tone !== 'undefined') {
+        synthChime = new Tone.PolySynth(Tone.Synth, {
+          oscillator: { type: "sine" },
+          envelope: { attack: 0.005, decay: 0.25, sustain: 0.1, release: 1.2 }
+        }).toDestination();
+        synthChime.volume.value = -8;
+        audioReady = true;
+      }
+    }
+
+    function triggerAppleCelebration() {
+      try {
+        initAppleChime();
+        Tone.start();
+        const now = Tone.now();
+        // Elegante arpegio brillante pentatónico en Do Mayor
+        synthChime.triggerAttackRelease("C5", "8n", now);
+        synthChime.triggerAttackRelease("E5", "8n", now + 0.1);
+        synthChime.triggerAttackRelease("G5", "8n", now + 0.2);
+        synthChime.triggerAttackRelease("C6", "4n", now + 0.32);
+        synthChime.triggerAttackRelease("E6", "2n", now + 0.44);
+      } catch (e) {
+        console.warn("Audio disponible al primer gesto de interacción");
+      }
+
+      // Confeti delicado con paleta pastel de Skye
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 60,
+          spread: 70,
+          origin: { y: 0.75 },
+          colors: ['#ff2d55', '#ff8fab', '#fbbf24', '#38bdf8', '#f43f5e', '#ffffff']
+        });
+      }
+    }
+
+    // 2. Cuenta regresiva de precisión
+    const targetDate = new Date(EVENT_CONFIG.eventTimestampIso).getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById('countdownTimer').innerHTML = `
+          <div class="col-span-4 text-center py-2 text-rose-300 font-bold text-sm">
+            ¡Hoy es el gran día de Georgina Jeruti! 🎈🎉
+          </div>
+        `;
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
+      document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cdMin').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('cdSec').textContent = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 3. Confirmación directa por WhatsApp
+    const btnWhatsappRSVP = document.getElementById('btnWhatsappRSVP');
+    btnWhatsappRSVP.addEventListener('click', () => {
+      triggerAppleCelebration();
+      const text = `¡Hola! Confirmo mi asistencia al cumpleaños #4 de Georgina Jeruti el 7 de octubre en Pizza Hut CDE 🐾🎉✨`;
+      const url = `https://wa.me/${EVENT_CONFIG.phone}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    });
+
+    // 4. Botón de sonido & confeti
+    document.getElementById('btnSoundCelebrate').addEventListener('click', () => {
+      triggerAppleCelebration();
+    });
+
+    // 5. Integración de Calendarios (Google y Apple .ics)
+    const btnAddToCalendar = document.getElementById('btnAddToCalendar');
+    const calendarModal = document.getElementById('calendarModal');
+    const btnCloseCalModal = document.getElementById('btnCloseCalModal');
+    const linkGoogleCalendar = document.getElementById('linkGoogleCalendar');
+    const btnDownloadIcs = document.getElementById('btnDownloadIcs');
+
+    // Google Calendar URL
+    const gCalTitle = encodeURIComponent("¡Cumpleaños #4 de Georgina Jeruti! 🐾");
+    const gCalDetails = encodeURIComponent("Festejo de 4 años de Georgina Jeruti. Temática: Skye Paw Patrol. Confirmar asistencia al 0973 544 415.");
+    const gCalLocation = encodeURIComponent("Salón de Eventos Pizza Hut, Calle Adrián Jara, Ciudad del Este, Paraguay");
+    // 07 de octubre 2026, 19:00 a 22:00 (UTC-3 -> 22:00 UTC)
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gCalTitle}&dates=20261007T220000Z/20261008T020000Z&details=${gCalDetails}&location=${gCalLocation}`;
+    linkGoogleCalendar.href = gCalUrl;
+
+    btnAddToCalendar.addEventListener('click', () => {
+      calendarModal.classList.remove('hidden');
+    });
+
+    btnCloseCalModal.addEventListener('click', () => {
+      calendarModal.classList.add('hidden');
+    });
+
+    calendarModal.addEventListener('click', (e) => {
+      if (e.target === calendarModal) calendarModal.classList.add('hidden');
+    });
+
+    // Generador nativo .ics para iPhone / iPad / Mac
+    btnDownloadIcs.addEventListener('click', () => {
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Apple Inc.//Mac OS X 10.15//EN",
+        "BEGIN:VEVENT",
+        "SUMMARY:¡Cumpleaños #4 de Georgina Jeruti! 🐾",
+        "DESCRIPTION:Festejo de 4 años de Georgina Jeruti. Temática: Skye Paw Patrol. Confirmar presencia al 0973 544 415.",
+        "LOCATION:Salón de Eventos Pizza Hut\\, Calle Adrián Jara\\, Ciudad del Este\\, Paraguay",
+        "DTSTART:20261007T220000Z",
+        "DTEND:20261008T020000Z",
+        "STATUS:CONFIRMED",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", "Cumple_Georgina_Jeruti_4_Anos.ics");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      calendarModal.classList.add('hidden');
+      triggerAppleCelebration();
+    });
+
+    // 6. Servidores de contenido directo de Google Drive con conmutación por error
+    const DRIVE_FILE_ID = "1FePZzOctn7NSnEyPZwKPxKtKppKJjn8G";
+    const driveEndpoints = [
+      `https://lh3.googleusercontent.com/d/${DRIVE_FILE_ID}`,
+      `https://drive.google.com/thumbnail?id=${DRIVE_FILE_ID}&sz=w1200`,
+      `https://drive.google.com/uc?export=view&id=${DRIVE_FILE_ID}`
+    ];
+    let driveAttempt = 0;
+
+    function handleDriveFallback(img) {
+      driveAttempt++;
+      if (driveAttempt < driveEndpoints.length) {
+        img.src = driveEndpoints[driveAttempt];
+      }
+    }
+
+    // Efecto suave de bienvenida
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 35,
+            spread: 50,
+            origin: { y: 0.7 },
+            colors: ['#ff2d55', '#ff8fab', '#fbbf24']
+          });
+        }
+      }, 700);
+    });
+  </script>
+</body>
+</html>
